@@ -25,7 +25,7 @@ export default [
     {
         input: 'src/index.js',
         output: {
-            file: 'dist/miniprogram-http-request.main.js'
+            file: 'dist/miniprogram-http-request.min.js'
         },
         plugins: [
             resolve(),

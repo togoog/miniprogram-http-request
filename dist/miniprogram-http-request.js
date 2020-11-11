@@ -437,7 +437,7 @@ function isCancel(value) {
   return !!(value && value.__CANCEL__);
 }
 
-var version = "1.0.1";
+var version = "1.0.0";
 
 function extend(a, b, context) {
   var _loop = function _loop(key) {

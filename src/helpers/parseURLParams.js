@@ -1,5 +1,5 @@
 function paramsSerializer(value) {
-  return JSON.parse('{' + value.replace(/=/g, ':').replace(/&/g, ',') + '}')
+  return JSON.parse('{"' + value.replace(/=/g, '":"').replace(/&/g, ',') + '"}')
 }
 
 function parseURLParams(url) {

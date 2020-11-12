@@ -201,7 +201,7 @@ function isAbsoluteURL(url) {
 }
 
 function paramsSerializer(value) {
-  return JSON.parse('{' + value.replace(/=/g, ':').replace(/&/g, ',') + '}');
+  return JSON.parse('{"' + value.replace(/=/g, '":"').replace(/&/g, ',') + '"}');
 }
 
 function parseURLParams(url) {
@@ -466,7 +466,7 @@ function isCancel(value) {
   return !!(value && value.__CANCEL__);
 }
 
-var version = "1.0.2";
+var version = "1.0.3";
 
 function extend(a, b, context) {
   var _loop = function _loop(key) {

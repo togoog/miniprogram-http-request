@@ -197,7 +197,28 @@ function combineURLs(baseURL, relativeURL) {
 }
 
 function isAbsoluteURL(url) {
-  return /^([a-z][z-z\d\+\-\.]*:)?\/\//i.test(url);
+  return /^([a-z][a-z\d\+\-\.]*:)?\/\//i.test(url);
+}
+
+function paramsSerializer(value) {
+  return JSON.parse('{' + value.replace(/=/g, ':').replace(/&/g, ',') + '}');
+}
+
+function parseURLParams(url) {
+  var index = url.indexOf('?');
+  var copy = url;
+  var params; //url has params
+
+  if (index > -1) {
+    url = url.substring(0, index);
+    copy = copy.replace(url + '?', '');
+    params = paramsSerializer(copy);
+  }
+
+  return {
+    url: url,
+    params: params
+  };
 }
 
 var SymbolRequest = Symbol('request');
@@ -250,6 +271,14 @@ var WxRequest = /*#__PURE__*/function () {
 
       if (config.baseURL && !isAbsoluteURL(config.url)) {
         config.url = combineURLs(config.baseURL, config.url);
+      } //parse url params
+
+
+      var URLParams = parseURLParams(config.url);
+
+      if (!isUndefined(URLParams.params)) {
+        config.url = URLParams.url;
+        config.data = Object.assign(config.data || {}, URLParams.params);
       }
 
       var interceptorRequest = [];
@@ -437,7 +466,7 @@ function isCancel(value) {
   return !!(value && value.__CANCEL__);
 }
 
-var version = "1.0.0";
+var version = "1.0.2";
 
 function extend(a, b, context) {
   var _loop = function _loop(key) {

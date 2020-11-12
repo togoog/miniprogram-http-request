@@ -4,6 +4,7 @@ import cleanConfig from './cleanConfig'
 import transformData from './transformData'
 import combineURLs from '../helpers/combineURLs'
 import isAbsoluteURL from '../helpers/isAbsoluteURL'
+import parseURLParams from '../helpers/parseURLParams'
 
 export const SymbolRequest = Symbol('request')
 export const SymbolHttpRequest = Symbol('httpRequest')
@@ -49,6 +50,13 @@ class WxRequest {
     
     if(config.baseURL && !isAbsoluteURL(config.url)){
       config.url = combineURLs(config.baseURL, config.url)
+    }
+
+    //parse url params
+    const URLParams = parseURLParams(config.url);
+    if(!isUndefined(URLParams.params)){
+      config.url = URLParams.url
+      config.data = Object.assign(config.data || {}, URLParams.params)
     }
 
     let interceptorRequest = [];

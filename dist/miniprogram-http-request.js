@@ -384,7 +384,7 @@ var WxRequest = /*#__PURE__*/function () {
     value: function value() {
       var _this2 = this;
 
-      ['DELETE', 'POST', 'CONNECT', 'TRACE', 'GET', 'HEAD', 'options'].forEach(function (method) {
+      ['DELETE', 'POST', 'CONNECT', 'TRACE', 'GET', 'HEAD', 'PUT', 'OPTIONS'].forEach(function (method) {
         _this2[method.toLowerCase()] = function (url, config) {
           return _this2[SymbolRequest](url, Object.assign(config || {}, {
             method: method
@@ -466,7 +466,7 @@ function isCancel(value) {
   return !!(value && value.__CANCEL__);
 }
 
-var version = "1.0.3";
+var version = "1.0.4";
 
 function extend(a, b, context) {
   var _loop = function _loop(key) {

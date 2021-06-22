@@ -160,7 +160,7 @@ class WxRequest {
 
   //alias method
   [SymbolAliasMethod]() {
-    ['DELETE', 'POST', 'CONNECT', 'TRACE', 'GET', 'HEAD', 'options'].forEach(method => {
+    ['DELETE', 'POST', 'CONNECT', 'TRACE', 'GET', 'HEAD', 'PUT', 'OPTIONS'].forEach(method => {
       this[method.toLowerCase()] = (url, config) => {
         return this[SymbolRequest](url, Object.assign(config || {}, {
           method
